@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "arion"
+version = "0.1.0"
+description = "A small local Whisper speech-to-text CLI"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "Unlicense"
+dependencies = [
+    "faster-whisper>=1.1,<2",
+    "mlx-whisper>=0.4; sys_platform == 'darwin' and platform_machine == 'arm64'",
+]
+
+[project.optional-dependencies]
+cuda = [
+    "nvidia-cuda-runtime-cu12>=12,<13; sys_platform == 'win32'",
+    "nvidia-cublas-cu12>=12,<13; sys_platform == 'win32'",
+    "nvidia-cudnn-cu12>=9,<10; sys_platform == 'win32'",
+]
+
+[project.scripts]
+arion = "arion.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
